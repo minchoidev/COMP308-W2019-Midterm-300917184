@@ -35,7 +35,7 @@
         <li><a href="/"><i class="fa fa-home fa-lg"></i> Home</a></li>
         <% } %>
 
-        <% if(title == "books") { %>
+        <% if(title == "Books") { %>
         <li class="active"><a href="/books"><i class="fa fa-book fa-lg">
             </i> Books List</a></li>
         <% } else { %>
@@ -48,16 +48,26 @@
         <li class="navbar-text"><i class="fas fa-lg fa-user"></i>
           Welcome, <%= displayName %></li>
         <!-- Logout -->
-        <li class="nav-item"><a href="/logout" class="nav-link">
+        <li><a href="/logout" class="nav-link">
             <<i class="fa fa-sign-out"></i> Sign out
           </a></li>
         <% } else { %>
         <!-- Login -->
-        <li class="nav-item"><a href="/login" class="nav-link">
+        <% if(title == "SignIn") { %>}
+        <li class="active"><a href="/login" class="nav-link">
             <i class="fa fa-sign-in"></i> Sign in</a></li>
+        <% } else { %>
+        <li><a href="/login" class="nav-link">
+            <i class="fa fa-sign-in"></i> Sign in</a></li>
+        <% } %>
         <!-- Register -->
-        <li class="nav-item"><a href="/register" class="nav-link">
+        <% if(title == "SignUp") { %>}
+        <li class="active"><a href="/register" class="nav-link">
             <i class="fa fa-user-plus"></i> Sign up</a></li>
+        <% } else { %>
+        <li><a href="/register" class="nav-link">
+            <i class="fa fa-user-plus"></i> Sign up</a></li>
+        <% } %>
         <% } %>
       </ul>
     </div><!-- /.navbar-collapse -->
