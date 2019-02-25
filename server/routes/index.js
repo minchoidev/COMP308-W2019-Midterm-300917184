@@ -1,3 +1,11 @@
+/**
+ * Web App: COMP308-2019-Midterm-300917184
+ * File Name: index.js
+ * Author: Minseok Choi
+ * Student ID: 300917184
+ * Date: 02/25/2019
+ */
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();

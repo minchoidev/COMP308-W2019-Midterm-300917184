@@ -1,3 +1,11 @@
+/**
+ * Web App: COMP308-2019-Midterm-300917184
+ * File Name: server.js
+ * Author: Minseok Choi
+ * Student ID: 300917184
+ * Date: 02/25/2019
+ */
+
 let app = require('./server/app');
 let debug = require('debug')('comp308-w2019-midterm:server');
 let http = require('http');

@@ -1,3 +1,11 @@
+/**
+ * Web App: COMP308-2019-Midterm-300917184
+ * File Name: app.js
+ * Author: Minseok Choi
+ * Student ID: 300917184
+ * Date: 02/25/2019
+ */
+
 // moddules for node and express
 let createError = require('http-errors');
 let express = require('express');
