@@ -35,7 +35,7 @@ router.get('/', (req, res, next) => {
 router.get('/add', (req, res, next) => {
   res.render('books/details', {
     title: 'Add New Book',
-    books: book({
+    books: book({   // it won't show any value in input fields
       "Title": "",
       "Description": "",
       "Price": "",
@@ -48,6 +48,7 @@ router.get('/add', (req, res, next) => {
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
 
+  // isntanciate a book
   let newBook = book({
     "Title": req.body.title,
     "Description": req.body.description,
@@ -56,6 +57,7 @@ router.post('/add', (req, res, next) => {
     "Genre": req.body.genre
 });
 
+// add a book in DB
 book.create(newBook, (err, book) => {
     if(err) {
         console.log(err);
@@ -73,6 +75,7 @@ book.create(newBook, (err, book) => {
 router.get('/:id', (req, res, next) => {
   let id = req.params.id;
 
+  // find a book in DB and display
   book.findById(id, (err, bookObject) => {
       if(err) {
           console.log(err);
@@ -93,6 +96,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/:id', (req, res, next) => {
   let id = req.params.id;
 
+  // update a book in DB by its id
   let updatedBook = book({
       "_id": id,
       "Title": req.body.title,
@@ -116,10 +120,19 @@ router.post('/:id', (req, res, next) => {
 
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
+  let id = req.params.id;
 
-  /*****************
-   * ADD CODE HERE *
-   *****************/
+  // remove a book in DB by its id
+  book.remove({_id: id}, (err) => {
+      if(err) {
+          console.log(err);
+          res.end(err);
+      }
+      else {
+          // refresh the books list
+          res.redirect('/books');
+      }
+  });
 });
 
 
