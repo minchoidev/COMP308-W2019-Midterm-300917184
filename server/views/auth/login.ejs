@@ -1,0 +1,39 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <h1>Please Login</h1>
+            <form method="POST" autocomplete="off">
+                <!-- Username -->
+                <div class="form-group row">
+                    <label for="UsernameTextField">User name:</label>
+                    <input type="text" class="form-control" id="UsernameTextField" placeholder="Enter Username"
+                        name="username" required>
+                </div>
+                <!-- Password -->
+                <div class="form-group row">
+                    <label for="PasswordTextField">Password:</label>
+                        <input type="password" class="form-control" id="PasswordTextField" placeholder="Enter Password"
+                            name="password" required>
+                </div>
+                <!-- Message -->
+                <div class="form-group">
+                    <% if(message.length > 0) { %>
+                    <div class="alert alert-danger">
+                        <%= message %>
+                    </div>
+                    <% } %>
+                </div>
+                <!-- Buttons -->
+                <div class="form-group row text-center">
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                    <a href="/register" class="btn btn-info">Sign Up</a>
+                    <a href="/" class="btn btn-warning">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>
