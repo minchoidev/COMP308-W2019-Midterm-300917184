@@ -1,9 +1,9 @@
 <% include ../partials/header.ejs %>
 
-<div class="container">
+<main class="container">
     <div class="row">
         <div class="col-md-offset-4 col-md-4">
-            <h1>Sign In</h1>
+            <h1>Sign Up</h1>
             <form method="POST" autocomplete="off">
                 <!-- Username -->
                 <div class="form-group">
@@ -17,6 +17,18 @@
                         <input type="password" class="form-control" id="PasswordTextField" placeholder="Enter Password"
                             name="password" required>
                 </div>
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="EmailTextField">Email:</label>
+                    <input type="email" class="form-control" id="EmailTextField" placeholder="Enter Email"
+                        name="email" required>
+                </div>
+                <!-- Display Name -->
+                <div class="form-group">
+                    <label for="DisplayNameTextField">Display name:</label>
+                    <input type="text" class="form-control" id="DisplayNameTextField" placeholder="Enter Displayed name"
+                        name="displayName" required>
+                </div>
                 <!-- Message -->
                 <div class="form-group">
                     <% if(message.length > 0) { %>
@@ -27,13 +39,12 @@
                 </div>
                 <!-- Buttons -->
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">Sign In</button>
-                    <a href="/register" class="btn btn-info">Sign Up</a>
+                    <button type="submit" class="btn btn-primary">Register</button>
                     <a href="/" class="btn btn-warning">Cancel</a>
                 </div>
             </form>
         </div>
     </div>
-</div>
+</main>
 
 <% include ../partials/footer.ejs %>
