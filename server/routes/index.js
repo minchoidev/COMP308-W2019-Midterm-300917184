@@ -23,4 +23,29 @@ router.get('/', (req, res, next) => {
    });
 });
 
+/* Get - render login page */
+router.get('/login', (req, res, next) => {
+  res.render('auth/login');
+});
+
+/* POST - try login by input information */
+router.post('/login', (req, res, next) => {
+  res.render('content/index');
+});
+
+/* Get - render register page */
+router.get('/register', (req, res, next) => {
+  res.render('auth/register');
+});
+
+/* POST - process the information passed from the form and register new user */
+router.post('/register', (req, res, next) => {
+  res.render('content/index');
+});
+
+/* Get - logout the current user  */
+router.get('/logout', (req, res, next) => {
+  res.render('content/index');
+});
+
 module.exports = router;
