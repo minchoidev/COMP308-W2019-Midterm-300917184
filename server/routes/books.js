@@ -91,11 +91,27 @@ router.get('/:id', (req, res, next) => {
 
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
+  let id = req.params.id;
 
-  /*****************
-   * ADD CODE HERE *
-   *****************/
+  let updatedBook = book({
+      "_id": id,
+      "Title": req.body.title,
+      "Description": req.body.description,
+      "Price": req.body.price,
+      "Author": req.body.author,
+      "Genre": req.body.genre
+  });
 
+  book.update({_id: id}, updatedBook, (err) => {
+      if(err) {
+          console.log(err);
+          res.end(err);
+      }
+      else {
+          // refresh the books list
+          res.redirect('/books');
+      }
+  })
 });
 
 // GET - process the delete by user id
