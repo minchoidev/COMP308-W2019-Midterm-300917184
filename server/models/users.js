@@ -20,13 +20,13 @@ let usersSchema = mongoose.Schema({
         type: String,
         default: "",
         trim: true,
-        required: "username is required"
+        required: "email is required"
     },
     displayName: {
         type: String,
         default: "",
         trim: true,
-        required: "username is required"
+        required: "displayName is required"
     },
     created: {
         type: Date,
