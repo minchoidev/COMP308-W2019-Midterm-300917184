@@ -43,10 +43,14 @@ router.post('/login', (req, res, next) => {
     if (err) {
       return next(err);
     }
-    // check login error?\
+    // check login error
     if (!user) {
       req.flash("loginMessage", "Login Fail");
-      return res.redirect('/login');
+      return res.render("auth/register", {
+        title: "SignUp",
+        message: req.flash("loginMessage"),
+        displayName: req.user ? req.user.displayName : ""
+      });
     }
     req.logIn(user, (err) => {
       // server error?
@@ -69,25 +73,24 @@ router.get('/register', (req, res, next) => {
 
 /* POST - process the information passed from the form and register new user */
 router.post('/register', (req, res, next) => {
-  // define a new user object
+  // instanciate a new user object
   let newUser = new User({
     username: req.body.username,
     email: req.body.email,
     displayName: req.body.displayName
   });
 
+  // register a new user
   User.register(newUser, req.body.password, (err) => {
     if (err) {
-      console.log("Error: Creating New User");
       if (err.name == "UserExistsError") {
         req.flash(
           "registerMessage",
           "Error: User already exists!"
         );
-        console.log("Error: User already exists!");
       }
       return res.render("auth/register", {
-        title: "Register",
+        title: "SignUp",
         message: req.flash("registerMessage"),
         displayName: req.user ? req.user.displayName : ""
       });
