@@ -14,6 +14,24 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
+/*
+// moduelse for authentication
+let passport = require('passport');
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let session = require('express-session');
+let flash = require('connect-flash');
+*/
+
+// modules for authentication
+let session = require('express-session');
+let passport = require('passport');
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
+
+
+
 // import "mongoose" - required for DB Access
 let mongoose = require('mongoose');
 // URI
@@ -23,7 +41,7 @@ mongoose.connect(process.env.URI || config.URI, { useNewUrlParser: true });
 
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
-mongoDB.once('open', ()=> {
+mongoDB.once('open', () => {
   console.log("Connected to MongoDB...");
 });
 
@@ -45,6 +63,32 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client')));
 
+// setup express-session
+app.use(session({
+  secret: "secret",
+  saveUninitialized: false,
+  resave: false,
+  cookie: { secure: true }
+}));
+
+// initialize flash
+app.use(flash());
+
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// create a User model
+let userModel = require('./models/users');
+let User = userModel.User; // this is allias
+
+// implement a User authentication strategy
+passport.use(User.createStrategy());
+
+// serialize and deserialize the User info
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // route redirects
 app.use('/', index);
@@ -52,12 +96,12 @@ app.use('/books', books);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

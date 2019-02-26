@@ -8,8 +8,9 @@
  */
 
 let mongoose = require('mongoose');
+let passportLocalMongoose = require('passport-local-mongoose');
 
-let usersSchema = mongoose.Schema({
+let userSchema = mongoose.Schema({
     username: {
         type: String,
         default: "",
@@ -41,4 +42,11 @@ let usersSchema = mongoose.Schema({
   collection: "users"
 });
 
-module.exports = mongoose.model('users', usersSchema);
+// configure options for the UserSchema
+let options = ({
+    missingPasswordError: "The password is wrong or missing"
+});
+
+userSchema.plugin(passportLocalMongoose, options); // passportLocalMongoose extends the schema to allow dev to add additional functionalities for authentication reasons
+
+module.exports.User = mongoose.model('users', userSchema);     // create a property allowing access outside the module

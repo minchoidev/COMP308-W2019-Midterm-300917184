@@ -45,8 +45,10 @@
 
         <% if(typeof displayName == 'string' && displayName) { %>
         <!-- Welcome Message -->
-        <li class="navbar-text"><i class="fas fa-lg fa-user"></i>
-          Welcome, <%= displayName %></li>
+        <li class="navbar-text">
+          <i class="fa fa-lg fa-user"></i>
+          Welcome, <%= displayName %>
+        </li>
         <!-- Logout -->
         <li><a href="/logout" class="nav-link">
             <<i class="fa fa-sign-out"></i> Sign out
